@@ -15,11 +15,6 @@
 
 <script>
 export default {
-  name: 'Header',
-  methods: {
-    setError (error, text) {
-      this.error = (error.response && error.response.data && error.response.data.error) || text
-    }
-  }
+  name: 'Header'
 }
 </script>
