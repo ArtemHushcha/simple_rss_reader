@@ -10,15 +10,15 @@ class ApplicationController < ActionController::API
   rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
-  def unprocessable_entity(e)
-    render json: { error: e.message }, status: 422
+  def unprocessable_entity(error)
+    render json: { error: error.message }, status: 422
   end
 
-  def not_found(e)
-    render json: { error: e.message }, status: 404
+  def not_found(error)
+    render json: { error: error.message }, status: 404
   end
 
-  def bad_request(e)
-    render json: { error: e.message }, status: 400
+  def bad_request(error)
+    render json: { error: error.message }, status: 400
   end
 end

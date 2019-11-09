@@ -19,21 +19,23 @@ module Api
 
       # POST /feeds
       def create
-        @feed = Feed.new(feed_params)
+        result = SaveFeed.call(attrs: feed_params, feed: nil)
 
-        if @feed.save
-          render json: @feed, status: 201
+        if result.success?
+          render json: result.feed, status: 201
         else
-          render json: { error: @feed.errors.full_messages.to_sentence }, status: 422
+          render json: { error: result.message }, status: 422
         end
       end
 
       # PATCH/PUT /feeds/1
       def update
-        if @feed.update(feed_params)
-          render json: @feed, status: 200
+        result = SaveFeed.call(attrs: feed_params, feed: @feed)
+
+        if result.success?
+          render json: result.feed, status: 200
         else
-          render json: { error: @feed.errors.full_messages.to_sentence }, status: 422
+          render json: { error: result.message }, status: 422
         end
       end
 

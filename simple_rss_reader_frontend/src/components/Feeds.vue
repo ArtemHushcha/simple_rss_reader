@@ -19,7 +19,7 @@
 
         <div class="flex items-center justify-between flex-wrap">
           <p class="block flex-1 font-mono font-semibold flex items-center ">
-            {{ feed.url }}
+            {{ feed.title }}
           </p>
 
           <button class="bg-tranparent text-sm hover:bg-blue hover:text-gray-900 text-blue border border-blue no-underline font-bold py-2 px-4 mr-2 rounded"
@@ -86,6 +86,10 @@ export default {
     updateFeed (feed) {
       this.editedFeed = {}
       this.$http.secured.patch(`/api/v1/feeds/${feed.id}`, { feed: { url: feed.url } })
+        .then(response => {
+          this.feeds.splice(this.feeds.indexOf(feed), 1, response.data)
+          this.error = ''
+        })
         .catch(error => this.setError(error, 'Cannot update feed'))
     }
   }

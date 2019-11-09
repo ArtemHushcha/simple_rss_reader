@@ -9,6 +9,15 @@ resource 'Feeds' do
   post '/api/v1/feeds' do
     route_summary 'POST /api/v1/feeds'
 
+    before :each do
+      stub_request(:get, url)
+        .to_return(
+          status: 200,
+          body: file_fixture('rss_feed_sample.xml').read,
+          headers: {}
+        )
+    end
+
     with_options scope: :feed, with_example: true do
       parameter :url, 'The feed URL', required: true
     end
@@ -19,7 +28,7 @@ resource 'Feeds' do
       {
         'id' => feed.id,
         'url' => url,
-        'title' => nil
+        'title' => feed.title
       }
     end
     let(:params) do

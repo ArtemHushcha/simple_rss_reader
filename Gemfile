@@ -7,6 +7,9 @@ ruby '2.6.5'
 
 gem 'active_model_serializers', '0.10.10'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'feedjira'
+gem 'httparty'
+gem 'interactor', '~> 3.0'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rack-cors', '1.0.2'

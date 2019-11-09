@@ -1,6 +1,37 @@
 {
   "RSpec": {
     "coverage": {
+      "/Users/artemhushcha/Projects/simple_rss_reader/app/interactors/save_feed.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        6,
+        6,
+        6,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        6,
+        6,
+        6,
+        6,
+        null,
+        null
+      ],
       "/Users/artemhushcha/Projects/simple_rss_reader/app/models/feed.rb": [
         1,
         1,
@@ -73,6 +104,8 @@
         null,
         1,
         1,
+        null,
+        1,
         1,
         null,
         0,
@@ -140,6 +173,6 @@
         0
       ]
     },
-    "timestamp": 1573149979
+    "timestamp": 1573500314
   }
 }

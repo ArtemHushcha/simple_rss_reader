@@ -9,6 +9,15 @@ resource 'Feeds' do
   put '/api/v1/feeds/:id' do
     route_summary 'PUT /api/v1/feeds/:id'
 
+    before :each do
+      stub_request(:get, new_url)
+        .to_return(
+          status: 200,
+          body: file_fixture('rss_feed_sample.xml').read,
+          headers: {}
+        )
+    end
+
     with_options scope: :feed, with_example: true do
       parameter :url, 'The feed URL', required: true
     end
@@ -19,7 +28,7 @@ resource 'Feeds' do
       {
         'id' => feed.id,
         'url' => new_url,
-        'title' => feed.title
+        'title' => 'BBC News - World'
       }
     end
     let(:params) do
@@ -31,7 +40,6 @@ resource 'Feeds' do
 
       example 'PUT /api/v1/feeds/:id 200' do
         do_request(params)
-
         expect(status).to eq(200)
         expect(JSON.parse(response_body)).to eq(expected_response)
       end
