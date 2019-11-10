@@ -46,7 +46,7 @@ resource 'Feeds' do
 
     context '422' do
       example_request 'POST /api/v1/feeds 422' do
-        do_request
+        do_request({})
         expect(status).to eq(422)
       end
     end

@@ -25,7 +25,6 @@ end
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'capybara', '~> 2.13'
   gem 'factory_bot_rails', '5.1.1'
   gem 'faker', '2.7.0'
   gem 'hashdiff', '1.0.0'
