@@ -5,7 +5,7 @@
 # * Create/Update Feed
 #
 
-class SaveFeed
+class FeedSave
   include Interactor
 
   def call

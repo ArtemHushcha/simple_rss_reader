@@ -19,7 +19,7 @@ module Api
 
       # POST /feeds
       def create
-        result = SaveFeed.call(attrs: feed_params, feed: nil)
+        result = FeedSave.call(attrs: feed_params, feed: nil)
 
         if result.success?
           render json: result.feed, status: 201
@@ -30,7 +30,7 @@ module Api
 
       # PATCH/PUT /feeds/1
       def update
-        result = SaveFeed.call(attrs: feed_params, feed: @feed)
+        result = FeedSave.call(attrs: feed_params, feed: @feed)
 
         if result.success?
           render json: result.feed, status: 200

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe SaveFeed do
+RSpec.describe FeedSave do
   subject :context do
     described_class.call(
       attrs: attrs,
@@ -23,8 +23,8 @@ RSpec.describe SaveFeed do
       )
   end
 
-  describe 'save feed' do
-    context 'create' do
+  describe 'succeeds' do
+    context 'update' do
       let(:feed) { create(:feed, url: 'http://www.ruby-lang.org/en/feeds/news.rss') }
 
       it 'set correct feed title' do
@@ -37,6 +37,26 @@ RSpec.describe SaveFeed do
 
       it 'set correct feed title' do
         expect(context.feed.title).to eq feed_title
+      end
+    end
+  end
+
+  describe 'fails' do
+    context 'update' do
+      let(:url) { 'wrong URL' }
+      let(:feed) { create(:feed, url: 'also wrong URL') }
+
+      it 'raire exception' do
+        expect(context.message).to eq('RSS URL is not valid')
+      end
+    end
+
+    context 'create' do
+      let(:feed) { nil }
+      let(:url) { 'wrong URL' }
+
+      it 'raire exception' do
+        expect(context.message).to eq('RSS URL is not valid')
       end
     end
   end

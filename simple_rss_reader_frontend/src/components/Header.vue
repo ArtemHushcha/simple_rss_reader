@@ -7,7 +7,7 @@
       </div>
       <div>
         <router-link to="/" class="link-grey px-2 no-underline">Feeds</router-link>
-        <router-link to="/" class="link-grey px-2 no-underline">Reader Page</router-link>
+        <router-link to="/posts" class="link-grey px-2 no-underline">Reader Page</router-link>
       </div>
     </div>
   </header>
