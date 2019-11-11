@@ -26,13 +26,13 @@
           @click.prevent="editFeed(feed)">Edit</button>
 
           <button class="bg-transprent text-sm hover:bg-red text-red hover:text-gray-900 no-underline font-bold py-2 px-4 rounded border border-red"
-         @click.prevent="removeFeed(feed)">Delete</button>
+          @click.prevent="removeFeed(feed)">Delete</button>
         </div>
 
         <div v-if="feed == editedFeed">
           <form action="" @submit.prevent="updateFeed(feed)">
             <div class="mb-6 p-4 bg-white rounded border border-grey-light mt-4">
-              <input class="input" v-model="feed.url" />
+              <input class="input" type="text" v-model="feed.url" />
               <input type="submit" value="Update" class="my-2 bg-transparent text-sm hover:bg-blue hover:text-gray-900 text-blue border border-blue no-underline font-bold py-2 px-4 rounded cursor-pointer">
             </div>
           </form>
@@ -54,7 +54,7 @@ export default {
     }
   },
   created () {
-    this.$http.secured.get('/api/v1/feeds')
+    this.$http.plain.get('/api/v1/feeds')
       .then(response => {
         this.feeds = response.data
       })
@@ -65,7 +65,7 @@ export default {
       this.error = (error.response && error.response.data && error.response.data.error) || text
     },
     addFeed () {
-      this.$http.secured.post('/api/v1/feeds/', { feed: { url: this.newFeed.url || '' } })
+      this.$http.plain.post('/api/v1/feeds/', { feed: { url: this.newFeed.url || '' } })
         .then(response => {
           this.feeds.unshift(response.data)
           this.newFeed = {}
@@ -74,7 +74,7 @@ export default {
         .catch(error => this.setError(error, 'Cannot create feed'))
     },
     removeFeed (feed) {
-      this.$http.secured.delete(`/api/v1/feeds/${feed.id}`)
+      this.$http.plain.delete(`/api/v1/feeds/${feed.id}`)
         .then(response => {
           this.feeds.splice(this.feeds.indexOf(feed), 1)
         })
@@ -85,7 +85,7 @@ export default {
     },
     updateFeed (feed) {
       this.editedFeed = {}
-      this.$http.secured.patch(`/api/v1/feeds/${feed.id}`, { feed: { url: feed.url } })
+      this.$http.plain.patch(`/api/v1/feeds/${feed.id}`, { feed: { url: feed.url } })
         .then(response => {
           this.feeds.splice(this.feeds.indexOf(feed), 1, response.data)
           this.error = ''
