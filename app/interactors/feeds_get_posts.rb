@@ -25,7 +25,7 @@ class FeedsGetPosts
   end
 
   def sort_feeds_posts
-    context.posts.sort_by! { |h| h['published'] }.reverse!
+    context.posts.sort_by! { |h| h.dig('published') || Date.new(1) }.reverse!
   end
 
   def filtered_feed_attrs(rss_feed)
