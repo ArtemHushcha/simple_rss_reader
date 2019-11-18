@@ -25,11 +25,17 @@ class FeedsGetPosts
   end
 
   def sort_feeds_posts
-    context.posts.sort_by! { |h| h.dig('published') || Date.new(1) }.reverse!
+    context.posts.sort_by! { |h| h.dig(:published) || Date.new(1) }.reverse!
   end
 
   def filtered_feed_attrs(rss_feed)
-    feed_attrs = %w[title url published]
-    rss_feed.entries.pluck(*feed_attrs).map { |p| feed_attrs.zip(p).to_h }
+    rss_feed.entries.pluck(:title, :url, :published).map do |entry|
+      {
+        feed_title: rss_feed.title,
+        title: entry[0],
+        url: entry[1],
+        published: entry[2]
+      }
+    end
   end
 end

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md m-auto py-10">
+  <div class="max-w-4xl m-auto py-10">
 
     <hr class="border border-grey-light my-6" />
 
@@ -8,7 +8,7 @@
 
         <div class="flex items-center justify-between flex-wrap">
           <p class="block flex-1 font-mono font-semibold flex items-center ">
-            <a v-bind:href="post.url" class="text-sm font-mono pl-4 font-semibold no-underline" target="_blank">{{ post.title }}</a>
+            <a v-bind:href="post.url" class="text-sm font-mono pl-4 font-semibold no-underline" target="_blank">{{ post.feed_title }} ({{ post.published | moment }}) : {{ post.title }}</a>
           </p>
         </div>
       </li>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'Posts',
   data () {
@@ -31,6 +32,11 @@ export default {
         this.posts = response.data
       })
       .catch(error => this.setError(error, 'Something went wrong'))
+  },
+  filters: {
+    moment: function (date) {
+      return moment(date).format('MMMM Do YYYY, h:mm:ss a')
+    }
   },
   methods: {
     setError (error, text) {

@@ -14,16 +14,19 @@ resource 'RSS Posts' do
     let(:expected_response) do
       [
         {
+          'feed_title' => 'Ruby News',
           'title' => 'Ruby 2.7.0-preview2 Released',
           'url' => 'https://www.ruby-lang.org/en/news/2019/10/22/ruby-2-7-0-preview2-released/',
           'published' => '2019-10-22T12:00:00.000Z'
         },
         {
+          'feed_title' => 'Ruby News',
           'title' => 'CVE-2019-16254: HTTP response splitting in WEBrick (Additional fix)',
           'url' => 'https://www.ruby-lang.org/en/news/2019/10/01/http-response-splitting-in-webrick-cve-2019-16254/',
           'published' => '2019-10-01T12:00:00.000Z'
         },
         {
+          'feed_title' => 'Ruby News',
           'title' => 'Ruby 2.4.8 Released',
           'url' => 'https://www.ruby-lang.org/en/news/2019/10/01/ruby-2-4-8-released/',
           'published' => nil
